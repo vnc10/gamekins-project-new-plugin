@@ -1,0 +1,11 @@
+version: '3.8'
+name: gamekins-project
+
+services:
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: gamekins
+    ports:
+      - "3306:3306"
