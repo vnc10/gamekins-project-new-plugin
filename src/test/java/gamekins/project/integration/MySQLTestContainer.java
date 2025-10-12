@@ -1,4 +1,4 @@
-package gamekins.project;
+package gamekins.project.integration;
 
 import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
