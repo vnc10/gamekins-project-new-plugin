@@ -42,7 +42,7 @@ class CouseServiceTest {
     }
 
     @Test
-    void shouldFindAllSubject() {
+    void shouldFindAllCourses() {
         Course course1 = new Course();
         course1.setId(1L);
         course1.setName("Teste1");

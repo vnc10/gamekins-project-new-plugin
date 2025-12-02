@@ -2,6 +2,7 @@ package gamekins.project.service;
 
 import gamekins.project.domain.Course;
 import gamekins.project.domain.Subject;
+import gamekins.project.domain.dto.CourseDTO;
 import gamekins.project.domain.dto.SubjectDTO;
 import gamekins.project.mapper.SubjectMapper;
 import gamekins.project.repository.CourseRepository;
@@ -13,6 +14,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -61,5 +64,28 @@ class SubjectServiceTest {
 
         verify(courseRepository).findById(1L);
         verify(subjectRepository).save(any(Subject.class));
+    }
+
+    @Test
+    void shouldFindByIdSuccess() {
+        Subject subject1 = new Subject();
+        subject1.setId(1L);
+        subject1.setName("Teste1");
+        subject1.setCode("001");
+
+        Subject subject2 = new Subject();
+        subject2.setId(2L);
+        subject2.setName("Teste2");
+        subject2.setCode("002");
+
+        List<Subject> subjects = Arrays.asList(subject1, subject2);
+
+        when(subjectRepository.findAll()).thenReturn(subjects);
+
+        List<SubjectDTO> result = subjectService.findAll();
+
+        assertNotNull(result);
+        assertEquals(2, result.size());
+        assertEquals("Teste1", result.get(0).getName());
     }
 }
