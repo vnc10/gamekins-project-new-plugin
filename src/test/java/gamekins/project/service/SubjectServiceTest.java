@@ -68,24 +68,16 @@ class SubjectServiceTest {
 
     @Test
     void shouldFindByIdSuccess() {
-        Subject subject1 = new Subject();
-        subject1.setId(1L);
-        subject1.setName("Teste1");
-        subject1.setCode("001");
+        Subject subject = new Subject();
+        subject.setId(1L);
+        subject.setName("Teste1");
+        subject.setCode("001");
 
-        Subject subject2 = new Subject();
-        subject2.setId(2L);
-        subject2.setName("Teste2");
-        subject2.setCode("002");
+        when(subjectRepository.findById(1L)).thenReturn(Optional.of(subject));
 
-        List<Subject> subjects = Arrays.asList(subject1, subject2);
-
-        when(subjectRepository.findAll()).thenReturn(subjects);
-
-        List<SubjectDTO> result = subjectService.findAll();
+        Optional<SubjectDTO> result = subjectService.findById(1L);
 
         assertNotNull(result);
-        assertEquals(2, result.size());
-        assertEquals("Teste1", result.get(0).getName());
+        assertEquals("Teste1", result.get().getName());
     }
 }
