@@ -15,7 +15,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -23,36 +24,34 @@ import static org.mockito.Mockito.when;
 class SubjectControllerTest {
 
     @Mock
-    private SubjectRepository subjectRepository;
+    private SubjectService subjectService;
 
     @Mock
     private CourseRepository courseRepository;
 
     @InjectMocks
-    private SubjectService subjectService;
+    private SubjectController subjectController;
 
     @Test
     void shouldGetAllSubjects() {
         Course course = new Course();
         course.setId(1L);
 
-        Subject subject1 = new Subject();
-        subject1.setId(1L);
-        subject1.setName("Arquitetura");
-        subject1.setCode("BCC2002");
-        subject1.setCourse(course);
+        SubjectDTO subjectDTO1 = new SubjectDTO();
+        subjectDTO1.setId(1L);
+        subjectDTO1.setName("Arquitetura");
+        subjectDTO1.setCode("BCC2002");
 
-        Subject subject2 = new Subject();
-        subject2.setId(2L);
-        subject2.setName("Arquitetura2.0");
-        subject2.setCode("BCC2003");
-        subject2.setCourse(course);
+        SubjectDTO subjectDTO2 = new SubjectDTO();
+        subjectDTO2.setId(2L);
+        subjectDTO2.setName("Arquitetura2.0");
+        subjectDTO2.setCode("BCC2003");
 
-        List<Subject> subjects = Arrays.asList(subject1, subject2);
+        List<SubjectDTO> subjects = Arrays.asList(subjectDTO1, subjectDTO2);
 
-        when(subjectRepository.findAll()).thenReturn(subjects);
+        when(subjectService.findAll()).thenReturn(subjects);
 
-        List<SubjectDTO> result = subjectService.findAll();
+        List<SubjectDTO> result = subjectController.getAllSubjects();
 
         assertNotNull(result);
         assertEquals(2, result.size());
@@ -61,6 +60,6 @@ class SubjectControllerTest {
         assertEquals("Arquitetura2.0", result.get(1).getName());
         assertEquals("BCC2003", result.get(1).getCode());
 
-        verify(subjectRepository).findAll();
+        verify(subjectService).findAll();
     }
 }
