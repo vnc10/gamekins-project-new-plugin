@@ -36,21 +36,20 @@ public class StudentServiceIntegrationTest {
         String ra = String.format("%05d", gerador.nextInt(10000));
         Course course = new Course();
         course.setName("Curso de Teste");
-        course.setCode(gerador.toString());
+        course.setCode(String.valueOf(gerador.nextInt()));
         course = courseRepository.save(course);
-        Long courseId = course.getId();
-        assertTrue(courseRepository.existsById(courseId), "O curso deveria existir antes do teste de delete");
 
         Student student = new Student();
         student.setCourse(course);
-        student.setRaNumber(ra.toString());
+        student.setRaNumber(ra);
         student.setName("Nome do Student");
-
         Long studentId = studentRepository.save(student).getId();
+        assertTrue(studentRepository.existsById(studentId));
         studentService.deleteById(studentId);
 
-        boolean exists = studentRepository.existsById(courseId);
-        assertFalse(exists, "O Aluno deveria ter sido deletado do banco de dados");
+        boolean exists = studentRepository.existsById(studentId);
+        assertFalse(exists, "O Aluno deveria ter sido deletado");
+
         courseRepository.deleteById(course.getId());
     }
 }
