@@ -58,5 +58,4 @@ class SubjectServiceTest {
 
         Mockito.verify(subjectRepository).save(Mockito.any(Subject.class));
     }
-
 }
