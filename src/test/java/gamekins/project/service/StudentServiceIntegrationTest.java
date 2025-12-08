@@ -2,6 +2,7 @@ package gamekins.project.service;
 
 import gamekins.project.domain.Course;
 import gamekins.project.domain.Student;
+import gamekins.project.integration.MySQLTestContainer;
 import gamekins.project.repository.CourseRepository;
 import gamekins.project.repository.StudentRepository;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 @Testcontainers
-public class StudentServiceIntegrationTest {
+public class StudentServiceIntegrationTest extends MySQLTestContainer {
 
     @Autowired
     private StudentService studentService;
