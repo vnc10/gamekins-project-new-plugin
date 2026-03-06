@@ -41,12 +41,12 @@ public class SubjectServiceIntegrationTest extends MySQLTestContainer {
     // Arrange
     Course course = new Course();
     course.setName("Computer Science Create Test");
-    course.setCode("CS-" + UUID.randomUUID().toString());
+    course.setCode("CS-" + UUID.randomUUID().toString().substring(0, 8));
     course = courseRepository.save(course);
 
     SubjectDTO subjectDTO = new SubjectDTO();
     subjectDTO.setName("Algorithms");
-    subjectDTO.setCode("ALG-" + UUID.randomUUID().toString());
+    subjectDTO.setCode("ALG-" + UUID.randomUUID().toString().substring(0, 8));
     subjectDTO.setCourseId(course.getId());
 
     // Act
@@ -68,12 +68,12 @@ public class SubjectServiceIntegrationTest extends MySQLTestContainer {
     // Arrange
     Course course = new Course();
     course.setName("Mathematics Find Test");
-    course.setCode("MAT-" + UUID.randomUUID().toString());
+    course.setCode("MAT-" + UUID.randomUUID().toString().substring(0, 8));
     course = courseRepository.save(course);
 
     Subject subject = new Subject();
     subject.setName("Calculus I");
-    subject.setCode("CALC-" + UUID.randomUUID().toString());
+    subject.setCode("CALC-" + UUID.randomUUID().toString().substring(0, 8));
     subject.setCourse(course);
     subject = subjectRepository.save(subject);
 
